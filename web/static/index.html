@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script type="text/javascript">
+  // This is a CodeSandbox injection script that's used to
+  // add navigation and inspector functionality to the preview
+  (function () {
+    // 1) Get the <script> tag that's currently running:
+    var me = document.currentScript;
+
+    // 2) Create the blocking‐style <script> to load:
+    var script = document.createElement("script");
+    script.src = "https://codesandbox.io/p/preview-protocol.js";
+
+    // By default a dynamically‐inserted <script> is async=true.
+    // Turn async off to make it behave like a normal blocking <script>:
+    script.async = false;
+    // (Do NOT set defer.)
+
+    // 3) Insert it immediately after the current <script>:
+    me.parentNode.insertBefore(script, me);
+  })();
+
+  const isIFramePreview = window.top !== window.self;
+
+  // Only run this script in editor context
+  if (isIFramePreview) {
+    // This script is used to enable Chrome DevTools functionality
+    (function () {
+      var script = document.createElement("script");
+      script.src =
+        "https://codesandbox.io/p/chrome-devtool/protocol/index.js";
+
+      script.onload = () => {
+        const devtoolProtocol = window.chobitsu;
+        if (devtoolProtocol) {
+          window.addEventListener("message", (event) => {
+            const { type, data } = event.data;
+
+            if (type === "FROM_DEVTOOL") {
+              devtoolProtocol.sendRawMessage(data);
+            }
+          });
+
+          devtoolProtocol.setOnMessage((data) => {
+            if (data.includes('"id":"tmp')) {
+              return;
+            }
+
+            window.parent.postMessage({ type: "TO_DEVTOOL", data }, "*");
+          });
+
+          devtoolProtocol.sendRawMessage(
+            `{"id":5,"method":"Runtime.enable","params":{}}`
+          );
+        }        
+      }
+
+      (document.head || document.documentElement).prepend(script);
+    })();
+  }
+
+  if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ === "undefined") {
+    let nextID = 0;
+    let hook = (__REACT_DEVTOOLS_GLOBAL_HOOK__ = {
+      renderers: new Map(),
+      supportsFiber: true,
+      inject: (renderer) => {
+        const id = nextID++;
+        hook.renderers.set(id, renderer);
+        return id;
+      },
+      onScheduleFiberRoot() {},
+      onCommitFiberRoot() {},
+      onCommitFiberUnmount() {},
+    });
+  }
+
+  document.currentScript.remove();
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>OtherSide - Paranormal Investigation</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#1a1a1a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="OtherSide">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/static/manifest.json">
+    
+    <!-- Icons -->
+    <link rel="icon" type="image/png" sizes="192x192" href="/static/icons/icon-192.png">
+    <link rel="apple-touch-icon" href="/static/icons/icon-192.png">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="/static/js/app.js" as="script">
+    <link rel="preload" href="/static/js/audio.js" as="script">
+</head>
+<body>
+    <div id="app" class="app">
+        <!-- Loading Screen -->
+        <div id="loading" class="loading-screen">
+            <div class="loading-spinner"></div>
+            <h2>Initializing OtherSide</h2>
+            <p>Preparing paranormal investigation tools...</p>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="main-nav" id="mainNav">
+            <div class="nav-brand">
+                <span class="nav-icon">👻</span>
+                <span>OtherSide</span>
+            </div>
+            <div class="nav-tabs">
+                <button class="nav-tab active" data-view="sessions">Sessions</button>
+                <button class="nav-tab" data-view="investigate">Investigate</button>
+                <button class="nav-tab" data-view="analysis">Analysis</button>
+            </div>
+            <div class="nav-status">
+                <span id="connectionStatus" class="status-indicator offline">Offline</span>
+            </div>
+        </nav>
+
+        <!-- Sessions View -->
+        <div class="view" id="sessionsView">
+            <div class="view-header">
+                <h1>Investigation Sessions</h1>
+                <button class="btn btn-primary" id="newSessionBtn">New Session</button>
+            </div>
+            
+            <div class="session-list" id="sessionList">
+                <!-- Session items will be populated dynamically -->
+            </div>
+
+            <!-- New Session Modal -->
+            <div class="modal" id="newSessionModal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>New Investigation Session</h2>
+                        <button class="modal-close" id="closeModal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="newSessionForm">
+                            <div class="form-group">
+                                <label for="sessionTitle">Session Title</label>
+                                <input type="text" id="sessionTitle" required placeholder="e.g., Abandoned Hospital Investigation">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="sessionVenue">Venue</label>
+                                <input type="text" id="sessionVenue" placeholder="e.g., Old City Hospital">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="sessionAddress">Address</label>
+                                <input type="text" id="sessionAddress" placeholder="Location address">
+                                <button type="button" class="btn btn-secondary btn-sm" id="getLocationBtn">Use Current Location</button>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="sessionNotes">Notes</label>
+                                <textarea id="sessionNotes" rows="3" placeholder="Initial observations, weather conditions, etc."></textarea>
+                            </div>
+                            
+                            <div class="environmental-section">
+                                <h3>Environmental Conditions</h3>
+                                <div class="env-grid">
+                                    <div class="env-item">
+                                        <label for="temperature">Temperature (°F)</label>
+                                        <input type="number" id="temperature" step="0.1">
+                                    </div>
+                                    <div class="env-item">
+                                        <label for="humidity">Humidity (%)</label>
+                                        <input type="number" id="humidity" step="0.1" min="0" max="100">
+                                    </div>
+                                    <div class="env-item">
+                                        <label for="pressure">Pressure (inHg)</label>
+                                        <input type="number" id="pressure" step="0.01">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="cancelSession">Cancel</button>
+                        <button type="submit" class="btn btn-primary" form="newSessionForm">Start Session</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Investigation View -->
+        <div class="view hidden" id="investigateView">
+            <div class="view-header">
+                <h1>Active Investigation</h1>
+                <div class="session-info">
+                    <span id="activeSessionTitle">No Active Session</span>
+                    <span id="sessionTimer">00:00:00</span>
+                </div>
+            </div>
+
+            <!-- Investigation Tools -->
+            <div class="investigation-tools">
+                <!-- EVP Recording -->
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <h3>EVP Recording</h3>
+                        <div class="tool-controls">
+                            <button class="btn btn-record" id="evpRecordBtn">
+                                <span class="record-icon">🎙️</span>
+                                <span class="record-text">Record</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="audio-visualizer">
+                        <canvas id="evpWaveform" width="300" height="100"></canvas>
+                        <div class="audio-metrics">
+                            <span>Level: <span id="audioLevel">0</span>dB</span>
+                            <span>Duration: <span id="recordingDuration">0:00</span></span>
+                        </div>
+                    </div>
+                    
+                    <div class="evp-controls">
+                        <button class="btn btn-secondary btn-sm" id="evpPlayBtn" disabled>Play</button>
+                        <button class="btn btn-secondary btn-sm" id="evpSlowBtn" disabled>Slow</button>
+                        <button class="btn btn-secondary btn-sm" id="evpReverseBtn" disabled>Reverse</button>
+                        <button class="btn btn-danger btn-sm" id="evpClearBtn" disabled>Clear</button>
+                    </div>
+                    
+                    <div class="evp-analysis" id="evpAnalysis">
+                        <!-- Analysis results will appear here -->
+                    </div>
+                </div>
+
+                <!-- VOX Communication -->
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <h3>VOX Communication</h3>
+                        <div class="tool-controls">
+                            <select id="voxLanguage" class="form-control">
+                                <option value="english">English</option>
+                                <option value="simple">Simple</option>
+                            </select>
+                            <select id="voxBank" class="form-control">
+                                <option value="minimal">Minimal Bank</option>
+                                <option value="standard">Standard Bank</option>
+                                <option value="extended">Extended Bank</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="vox-display">
+                        <div class="vox-output" id="voxOutput">
+                            <p class="vox-placeholder">Waiting for communication...</p>
+                        </div>
+                        <div class="trigger-strength">
+                            <span>Trigger Strength: </span>
+                            <div class="strength-bar">
+                                <div class="strength-fill" id="triggerStrengthBar"></div>
+                            </div>
+                            <span id="triggerStrengthValue">0%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="vox-controls">
+                        <button class="btn btn-primary" id="voxTriggerBtn">Manual Trigger</button>
+                        <button class="btn btn-secondary" id="voxClearBtn">Clear</button>
+                    </div>
+                </div>
+
+                <!-- Radar Detection -->
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <h3>Radar Detection</h3>
+                        <div class="tool-controls">
+                            <button class="btn btn-toggle" id="radarToggleBtn" data-active="false">
+                                <span class="toggle-text">Start Radar</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="radar-display">
+                        <canvas id="radarCanvas" width="250" height="250"></canvas>
+                        <div class="radar-legend">
+                            <div class="legend-item">
+                                <span class="legend-color emf"></span>
+                                <span>EMF Anomaly</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color audio"></span>
+                                <span>Audio Anomaly</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color both"></span>
+                                <span>Combined Signal</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="radar-readings">
+                        <div class="reading-item">
+                            <span>EMF Level:</span>
+                            <span id="emfReading">0.0 mG</span>
+                        </div>
+                        <div class="reading-item">
+                            <span>Audio Anomalies:</span>
+                            <span id="audioAnomalies">0</span>
+                        </div>
+                        <div class="reading-item">
+                            <span>Detection Count:</span>
+                            <span id="detectionCount">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SLS Detection -->
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <h3>SLS Detection</h3>
+                        <div class="tool-controls">
+                            <button class="btn btn-toggle" id="slsToggleBtn" data-active="false">
+                                <span class="toggle-text">Start SLS</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="sls-display">
+                        <div class="video-container">
+                            <video id="slsVideo" autoplay muted playsinline></video>
+                            <canvas id="slsOverlay"></canvas>
+                        </div>
+                        <div class="sls-confidence">
+                            <span>Confidence: <span id="slsConfidence">0%</span></span>
+                            <span>Detections: <span id="slsDetections">0</span></span>
+                        </div>
+                    </div>
+                    
+                    <div class="sls-filters">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="slsMinSizeFilter" checked>
+                            <span>Minimum Size Filter</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="slsMovementFilter" checked>
+                            <span>Movement Filter</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="slsObjectFilter" checked>
+                            <span>Object Rejection</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Session Log -->
+            <div class="session-log">
+                <h3>Session Log</h3>
+                <div class="log-container" id="sessionLog">
+                    <!-- Log entries will be added dynamically -->
+                </div>
+                <div class="log-input">
+                    <input type="text" id="logInput" placeholder="Add note or voice command...">
+                    <button class="btn btn-sm btn-primary" id="addLogBtn">Add</button>
+                    <button class="btn btn-sm btn-secondary" id="voiceLogBtn">🎤</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Analysis View -->
+        <div class="view hidden" id="analysisView">
+            <div class="view-header">
+                <h1>Session Analysis</h1>
+                <select id="analysisSessionSelect" class="form-control">
+                    <option value="">Select a session...</option>
+                </select>
+            </div>
+
+            <div class="analysis-dashboard" id="analysisDashboard">
+                <!-- Analysis content will be populated dynamically -->
+                <div class="analysis-placeholder">
+                    <p>Select a session to view detailed analysis</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Alert/Notification System -->
+        <div id="alerts" class="alerts-container">
+            <!-- Alerts will be dynamically added here -->
+        </div>
+
+        <!-- Offline Indicator -->
+        <div id="offlineIndicator" class="offline-indicator hidden">
+            <span>You are currently offline. Some features may be limited.</span>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/static/js/app.js"></script>
+    <script src="/static/js/audio.js"></script>
+    <script src="/static/js/radar.js"></script>
+    <script src="/static/js/sls.js"></script>
+    <script src="/static/js/offline.js"></script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/static/sw.js')
+                .then(registration => {
+                    console.log('SW registered:', registration);
+                })
+                .catch(error => {
+                    console.log('SW registration failed:', error);
+                });
+        }
+    </script>
+</body>
+</html>

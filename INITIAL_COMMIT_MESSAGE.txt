@@ -1,0 +1,35 @@
+Initial commit: Complete OtherSide paranormal investigation application
+
+🔮 Core Features:
+- Go backend with Clean Architecture (domain, service, repository, handler layers)
+- Progressive Web App frontend with mobile optimization
+- EVP recording and analysis with real-time waveform visualization
+- VOX communication system with phonetic banks and environmental triggers
+- Radar detection with 360° sweep and device sensor integration
+- SLS detection using camera and computer vision for skeletal tracking
+- Complete offline support with service worker and background sync
+- Data export functionality (JSON, CSV, ZIP formats)
+- OpenTelemetry observability and performance monitoring
+- SQLite database with comprehensive schema
+
+🛠️ Technical Implementation:
+- RESTful API with full CORS support
+- Mobile-first responsive design with professional paranormal theme
+- Session management with environmental condition tracking
+- Real-time audio/video processing with WebRTC APIs
+- IndexedDB storage for offline functionality
+- Service worker for PWA capabilities
+- Comprehensive error handling and logging
+
+✨ Investigation Tools:
+✅ EVP capture & playback with noise suppression
+✅ VOX synthesizer with silent operation until triggered
+✅ Radar/presence simulation with data-driven detection
+✅ SLS visual detection with false-positive reduction
+✅ Local data management and export options
+✅ Voice-response capability and session logging
+✅ Offline functionality for remote investigation sites
+✅ Low-latency processing and reliable data capture
+✅ Transparent operation modes and minimal false-positives
+
+Built following Go best practices with dependency injection, comprehensive testing support, and production-ready architecture.

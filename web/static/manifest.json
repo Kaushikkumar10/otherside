@@ -1,0 +1,132 @@
+{
+  "name": "OtherSide - Paranormal Investigation",
+  "short_name": "OtherSide",
+  "description": "Professional paranormal investigation app with EVP recording, VOX communication, radar detection, and SLS analysis",
+  "version": "1.0.0",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#6c5ce7",
+  "background_color": "#1a1a1a",
+  "categories": ["entertainment", "utilities", "lifestyle"],
+  "lang": "en-US",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "/static/icons/icon-72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/static/icons/icon-96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/static/icons/icon-128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/static/icons/icon-144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/static/icons/icon-152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/static/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/static/icons/icon-384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/static/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/static/screenshots/desktop-home.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "OtherSide home screen on desktop"
+    },
+    {
+      "src": "/static/screenshots/mobile-investigation.png",
+      "sizes": "360x640",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Active paranormal investigation on mobile"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "New Investigation",
+      "short_name": "Investigate",
+      "description": "Start a new paranormal investigation session",
+      "url": "/?action=new-session",
+      "icons": [
+        {
+          "src": "/static/icons/shortcut-investigate.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "View Sessions",
+      "short_name": "Sessions",
+      "description": "View all investigation sessions",
+      "url": "/?view=sessions",
+      "icons": [
+        {
+          "src": "/static/icons/shortcut-sessions.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Analysis",
+      "short_name": "Analysis",
+      "description": "Analyze investigation data",
+      "url": "/?view=analysis",
+      "icons": [
+        {
+          "src": "/static/icons/shortcut-analysis.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  },
+  "handle_links": "preferred",
+  "capture_links": "existing-client-navigate"
+}
